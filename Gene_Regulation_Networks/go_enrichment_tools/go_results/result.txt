@@ -1,0 +1,20 @@
+GO:0006955 BP 5.91e-11   10/35   292/19664 D02 immune response                          1088, 1118, 1511, 3117, 3119, 3554, 6932, 7850, 9235, 11251 
+GO:0002503 BP 2.85e-06    3/35    16/19664 D08 peptide antigen assembly with MHC class II protein complex 3117, 3119, 3126 
+GO:0002381 BP 3.45e-06    3/35    17/19664 D07 immunoglobulin production involved in immunoglobulin-mediated immune response 3117, 3119, 3126 
+GO:0006954 BP 4.53e-06    7/35   387/19664 D04 inflammatory response                    719, 2150, 2353, 2919, 3554, 5743, 6556 
+GO:0071222 BP 7.41e-06    5/35   154/19664 D06 cellular response to lipopolysaccharide  383, 820, 1511, 2919, 3934 
+GO:0050829 BP 1.27e-05    4/35    81/19664 D07 defense response to Gram-negative bacterium 820, 1511, 4057, 6556 
+GO:0019886 BP 2.03e-05    3/35    30/19664 D05 antigen processing and presentation of exogenous peptide antigen via MHC class II 3117, 3119, 3126 
+GO:0050870 BP 2.47e-05    3/35    32/19664 D08 positive regulation of T cell activation 3117, 3119, 3126 
+GO:0035580 CC 1.16e-09    6/35    62/19664 D07 specific granule lumen                   383, 820, 1118, 2919, 3934, 4057 
+GO:0005615 CC 8.31e-07   13/35  1498/19664 D02 extracellular space                      383, 710, 820, 1088, 1118, 1511, 2335, 2919, 3934, 4057, 4680, 9235, 54674 
+GO:0005576 CC 1.37e-06   14/35  1847/19664 D02 extracellular region                     383, 710, 713, 820, 939, 1118, 1511, 2335, 2919, 3554, 3934, 4057, 7850, 124912 
+GO:1904724 CC 2.69e-06    4/35    55/19664 D05 tertiary granule lumen                   820, 1118, 2919, 4057 
+GO:0042613 CC 3.45e-06    3/35    17/19664 D05 MHC class II protein complex             3117, 3119, 3126 
+GO:0071556 CC 1.64e-05    3/35    28/19664 D06 integral component of lumenal side of endoplasmic reticulum membrane 3117, 3119, 3126 
+GO:0030658 CC 4.52e-05    3/35    39/19664 D06 transport vesicle membrane               3117, 3119, 3126 
+GO:0012507 CC 1.20e-04    3/35    54/19664 D07 ER to Golgi transport vesicle membrane   3117, 3119, 3126 
+GO:0035577 CC 1.42e-04    3/35    57/19664 D08 azurophil granule membrane               719, 1088, 4680 
+GO:0042581 CC 2.37e-04    2/35    13/19664 D09 specific granule                         820, 4057 
+GO:0030669 CC 2.50e-04    3/35    69/19664 D08 clathrin-coated endocytic vesicle membrane 3117, 3119, 3126 
+GO:0030666 CC 2.72e-04    3/35    71/19664 D06 endocytic vesicle membrane               3117, 3119, 3126 

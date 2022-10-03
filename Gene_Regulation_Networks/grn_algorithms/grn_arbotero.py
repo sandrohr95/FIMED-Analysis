@@ -13,7 +13,7 @@ def run_arboreto(expression_matrix: pd.DataFrame, net_threshold: float = 0.05, c
     :param net_threshold: filter genes for better visualization
     :param expression_matrix: gene expression data
     :param algorithm_name:
-    :return:
+    :return: gene regulatory network
     """
     # Transpose the dataframe to get correct format to create the network
     df = expression_matrix.transpose()
@@ -33,5 +33,6 @@ def run_arboreto(expression_matrix: pd.DataFrame, net_threshold: float = 0.05, c
     else:
         print("Wrong algorithm name. Should either be GENIE3 or GRNBoost2.")
 
-    script_html = grn_plot.gene_regulatory_network_plot(network, net_threshold, config, algorithm_name)
-    return script_html
+    # script_html = grn_plot.gene_regulatory_network_plot(network, net_threshold, config, algorithm_name)
+    # return script_html
+    return network

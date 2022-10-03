@@ -3,6 +3,9 @@ import plotly
 from plotly.offline import plot
 from plotly.graph_objs import Figure, Data, Layout, Scatter3d, XAxis, YAxis, ZAxis, Scene, Margin, Annotations, Font, \
     Annotation, Line, Marker
+from collections import Counter
+import pandas as pd
+import codecs
 
 plotly.tools.set_credentials_file(username='sandrohr', api_key='geLPhCC0443kFfOFbeU5')
 
@@ -18,27 +21,23 @@ def gene_regulatory_network_plot(network, net_threshold, config, algorithm_name)
     :param algorithm_name: 1, 2, 3, 4
     :return:
     """
-
     # We put a threshold to obtain a clear graph with the most representatives genes
     limit = network.index.size * net_threshold
-    #print(network)
 
-    # graph = nx.from_pandas_edgelist(network.head(int(limit)), 'TF', 'target', ['importance'],
-    #                             create_using=nx.Graph(directed=True))
-
-    graph = nx.from_pandas_edgelist(network.head(int(limit)), source='TF', target='target', edge_attr=None,
-                                    create_using=nx.DiGraph())
+    graph = nx.from_pandas_edgelist(network.head(int(limit)), 'TF', 'target', ['importance'],
+                                    create_using=nx.Graph(directed=True))
 
     n_nodes = len(list(graph.node()))  # number of genes n_nodes
     list_nodes = list(graph.node())  # list of genes n_nodes
 
-    edges = list(graph.edges())
     layout = {
         1: nx.fruchterman_reingold_layout(graph, dim=3),
         2: nx.circular_layout(graph, dim=3)
     }.get(config, nx.circular_layout(graph, dim=3))
 
     layout_network = list(layout.values())
+
+    edges = list(graph.edges())
 
     xn = [layout_network[k][0] for k in range(n_nodes)]  # x-coordinates of n_nodes
     yn = [layout_network[k][1] for k in range(n_nodes)]  # y-coordinates
@@ -55,8 +54,8 @@ def gene_regulatory_network_plot(network, net_threshold, config, algorithm_name)
                        y=ye,
                        z=ze,
                        mode='lines',
-                       line=Line(color='rgb(125,125,125)', width=2),
-                       hoverinfo='none'
+                       line=Line(color='rgb(125,125,125)', width=2)
+                       # hoverinfo='text'
                        )
 
     trace2 = Scatter3d(x=xn,
@@ -115,7 +114,13 @@ def gene_regulatory_network_plot(network, net_threshold, config, algorithm_name)
                      ]),
                  ))
 
-    # plotly.offline.plot(fig, filename=algorithm_name+'.html', auto_open=True)
+    plotly.offline.plot(fig, filename=algorithm_name + '.html', auto_open=False)
     script = plot(fig, output_type='div', include_plotlyjs=False, show_link=True)
     print(script)
     return script
+
+
+def new_gene_regulatory():
+    f = codecs.open("/home/antonio/Anaconda_Projects/Python_Projects/FIMED-Analysis/VisualizationTools/bokeh_plots/Gene Regulatory Network.html", 'r')
+    print(f.read())
+    return f.read()

@@ -14,17 +14,19 @@ from bokeh.models import EdgesAndLinkedNodes, NodesAndLinkedEdges
 from bokeh.embed import components
 
 
-network_file = "/home/antonio/Anaconda_Projects/Python_Projects/FIMED_ANALYSIS/Gene_Regulation_Networks/data_dir/Results00afb767-2295-11ec-abbf-fa163e4623e5/grn_panda_network.csv"
-df = pd.read_csv(network_file, header=None, sep=" ")
-df.columns = ["TF", "target", "importance"]
+network_file = "/home/antonio/Anaconda_Projects/Python_Projects/FIMED-Analysis/VisualizationTools/data/Network.csv"
+df = pd.read_csv(network_file, sep=",")
+print(df)
 # We put a threshold to obtain a clear graph with the most representatives genes
-limit = df.index.size * 0.2
+limit = df.index.size * 0.05
 # Create Graph
 G = networkx.from_pandas_edgelist(df.head(int(limit)), 'TF', 'target', 'importance')
 degrees = dict(networkx.degree(G))
+print(degrees)
 networkx.set_node_attributes(G, name='degree', values=degrees)
+# networkx.set_node_attributes(G, labels, 'labels')
 # Slightly adjust degree so that the nodes with very small degrees are still visible
-number_to_adjust_by = 4
+number_to_adjust_by = 20
 adjusted_node_size = dict([(node, degree + number_to_adjust_by) for node, degree in networkx.degree(G)])
 networkx.set_node_attributes(G, name='adjusted_node_size', values=adjusted_node_size)
 
@@ -58,7 +60,7 @@ size_by_this_attribute = 'adjusted_node_size'
 color_by_this_attribute = 'modularity_color'
 
 # Pick a color palette — Blues8, Reds8, Purples8, Oranges8, Viridis8
-color_palette = Blues8
+color_palette = Viridis8
 
 # Choose a title!
 title = 'Gene Regulatory Network'
@@ -66,9 +68,7 @@ title = 'Gene Regulatory Network'
 # Establish which categories will appear when hovering over each node
 HOVER_TOOLTIPS = [
     ("Gen", "@index"),
-    ("Degree", "@degree"),
-    ("Modularity Class", "@modularity_class"),
-    ("Modularity Color", "$color[swatch]:modularity_color")
+    ("Degree", "@degree")
 ]
 
 # Create a plot — set dimensions, toolbar, and title
@@ -78,7 +78,7 @@ plot = figure(tooltips=HOVER_TOOLTIPS,
 
 # Create a network graph object
 # https://networkx.github.io/documentation/networkx-1.9/reference/generated/networkx.drawing.layout.spring_layout.html
-network_graph = from_networkx(G, networkx.spring_layout, scale=10, center=(0, 0))
+network_graph = from_networkx(G, networkx.fruchterman_reingold_layout, scale=10, center=(0, 0))
 
 # Set node sizes and colors according to node degree (color as category from attribute)
 network_graph.node_renderer.glyph = Circle(size=size_by_this_attribute, fill_color=color_by_this_attribute)
@@ -104,4 +104,4 @@ show(plot)
 script, div = components(plot)
 print(div,script)
 
-# save(plot, filename=f"{title}.html")
+save(plot, filename=f"{title}.html")

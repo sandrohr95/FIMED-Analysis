@@ -1,5 +1,8 @@
 import subprocess
 import data_visualization.grn_plot as grn_plot
+import data_visualization.grn_ensembler as grn_plot_improve
+
+# import data_visualization.grn_bokeh as grn_bokeh
 import pandas as pd
 import uuid
 import os
@@ -43,7 +46,8 @@ def run_grn_panda(expression_data: pd.DataFrame, net_threshold: float = 0.05, co
     network.columns = ["TF", "target", "importance"]
 
     # Run Script Plotly
-    script_html = grn_plot.gene_regulatory_network_plot(network, net_threshold, config, algorithm_name)
+    # script_html = grn_plot.gene_regulatory_network_plot(network, net_threshold, config, algorithm_name)
+
 
     # Delete Folders
     try:
@@ -53,4 +57,5 @@ def run_grn_panda(expression_data: pd.DataFrame, net_threshold: float = 0.05, co
         print("Error: %s : %s" % (network_dir, e.strerror))
         print("Error: %s : %s" % (expression_data_dir, e.strerror))
 
-    return script_html
+    # return script_html
+    return network
